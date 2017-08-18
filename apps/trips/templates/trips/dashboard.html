@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Travel Dashboard</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'trips/css/styles.css' %}" media="screen" title="no title" charset="utf-8">
+
+  </head>
+
+<body>
+  <div id="header">
+  	<h3>Welcome {{user.name}}</h3>
+  <a href="/logout"> Log out </a>
+  </div>
+
+<h4> Your Trip Schedules </h4>
+<table id="trips">
+	<tr>
+		<th> Destionation </th>
+		<th> Travel Start Date </th>
+		<th> Travel End Date </th>
+		<th> Plan </th>
+		<th> Action </th>
+
+
+	</tr>
+	{% if user.created_trips.all %}
+	{% for trip in user.created_trips.all %}
+		<tr>
+		<td> {{trip.dest}}</td>
+		<td> {{trip.startDate}}</td>
+		<td> {{trip.endDate}}</td>
+		<td> {{trip.description}}</td>
+		<td> <a href="/delete/{{trip.id}}"> Delete </a></td>
+		</tr>
+	{% endfor %}
+	{% elif user.joined_trips.all %}
+	{% for trip in user.joined_trips.all %}
+		<tr>
+		<td> {{trip.dest}}</td>
+		<td> {{trip.startDate}}</td>
+		<td> {{trip.endDate}}</td>
+		<td> {{trip.description}}</td>
+		<td></td>
+		</tr>
+	{% endfor %}
+	{% else %}
+	<tr> 
+		<td colspan="4"> You did not join any travel plan. Join one! </td>
+	</tr>
+		{% endif %}
+
+</table>
+
+<h4> Other User's Travel Plans </h4>
+<table id="others">
+	<tr>
+		<th> Name </th>
+		<th> Destionation </th>
+		<th> Travel Start Date </th>
+		<th> Travel End Date </th>
+		<th> Do you want to Join? </th>
+	</tr>
+		{% if trips %}
+		{% for trip in trips %}
+	<tr>
+		<td> {{ trip.creator.name}} </td>
+		<td> <a href="/destination/{{trip.id}}">{{ trip.dest}} </a></td>
+		<td> {{ trip.startDate}} </td>
+		<td> {{ trip.endDate}} </td>
+		<td> <a href="/enrolling/{{trip.id}}">Join </a> </td>
+	</tr>
+		{% endfor %}
+		{% else %}
+	<tr> 
+		<td colspan="4"> There is not available trip you could join. Do you want to <a href="/travels/add">add a new travel plan </a> ? </td>
+	</tr>
+		{% endif %}
+</table>
+        {% if messages %}
+      {% for message in messages %}        
+    <p>{{message}} </p>
+      {% endfor %}
+      {% endif %}
+
+
+<a href="/travels/add"> Add Travel Plan </a>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

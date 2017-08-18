@@ -1,0 +1,31 @@
+#registration, #login{
+	display: inline-block;
+	border:3px solid skyblue;
+	border-radius:10px;
+	width: 43%;
+	padding:30px;
+	height:300px;
+	vertical-align: top;
+}
+
+input:hover{
+	background-color:#d6f2fc;
+}
+
+#trips, #others{
+	width: 70%;
+	border:3px solid grey;
+	text-align: center;
+}
+
+tr:hover{
+	background:#eae8e8;
+}
+
+tr:nth-child(even){
+	background-color:#f2efef;
+}
+
+th{
+	background-color:#9fd8f4;
+}
